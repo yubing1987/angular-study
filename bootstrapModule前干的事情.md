@@ -1,21 +1,18 @@
-# Angular2 启动过程
+# 一个最简单的Angular程序
 在了解Angular2启动过程之前，我们先看一段代码：
 ```
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-
-// The app module
-import {
-    NgModule,
-    Component
-}  from "@angular/core";
+import { NgModule, Component}  from "@angular/core";
 import { BrowserModule }  from "@angular/platform-browser";
 
+// 定义Component
 @Component({
     selector: "my-app",
     template: "<div></div>"
 })
 export class AppComponent {}
 
+// 定义Module
 @NgModule({
     imports: [
         BrowserModule
@@ -27,22 +24,25 @@ export class AppComponent {}
 })
 export class AppModule { }
 
+// 启动Angular程序
 platformBrowserDynamic().bootstrapModule(AppModule);
 ```
-在这段代码中我们定义了一个AppComponent和一个AppModule类。
-这段代码实现了一个最为简单的Angular2程序，它包含了Angular2最基本的几个组成部分：Module和Component。
-最后我们把设计好的Module传给Angular，让它来帮我们启动整个程序。
-从代码中我们可以看出，整个过程包括两大部分：
-1、platformBrowserDynamic()
-2、bootstrapModule(AppModule)([在这里](http://www.jianshu.com/p/dd085c38f238))
-本文先研究第一步。
-## platformBrowserDynamic都干了啥
+这一段代码主要有四个部分组成：  
+1、引用Angular相关的类  
+2、定义Component（什么是Component（todo：下次分析））    
+3、定义了一个Module（什么是Module（todo：下次分析））  
+4、调用Angular的启动函数，实现启动功能。  
+从代码我们可以发现，启动过程实际上是分成了两大步骤的。  
+1、调用platformBrowserDynamic()方法  
+2、调用bootstrapModule(AppModule)方法([在这里](./bootstrapModule背后的故事.md))
+# platformBrowserDynamic都干了什么
 要想知道platformBrowserDynamic都干了啥，我们可以查看他的代码：
 ```
 export const platformBrowserDynamic = createPlatformFactory(
     platformCoreDynamic, 'browserDynamic', INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS);
 ```
-可以看出这个方法是通过调用createPlatformFactory方法得到的，生成的时候会传入三个参数，其中有一个是字符串，我们看看其它两个参数都是什么：
+可以看出这个方法是通过调用createPlatformFactory方法得到的，生成的时候会传入三个参数，其中有第二个参数是字符串，我们看看其它两个参数都是什么。  
+第一个参数：
 ```
 export const platformCoreDynamic = createPlatformFactory(platformCore, 'coreDynamic', [
   {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
@@ -50,6 +50,7 @@ export const platformCoreDynamic = createPlatformFactory(platformCore, 'coreDyna
   {provide: PLATFORM_INITIALIZER, useValue: _initReflector, multi: true},
 ]);
 ```
+第三个参数：
 ```
 export const INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS: Provider[] = [
   INTERNAL_BROWSER_PLATFORM_PROVIDERS,
