@@ -29,8 +29,8 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 这一段代码主要有四个部分组成：  
 1、引用Angular相关的类  
-2、定义Component（什么是Component（todo：下次分析））    
-3、定义了一个Module（什么是Module（todo：下次分析））  
+2、定义Component（什么是Component（todo：下次分析），@Component是什么（[在这里](./Angular中注解的实现原理.md)））    
+3、定义了一个Module（什么是Module（todo：下次分析），@Module是什么（[在这里](./Angular中注解的实现原理.md)））  
 4、调用Angular的启动函数，实现启动功能。  
 从代码我们可以发现，启动过程实际上是分成了两大步骤的。  
 1、调用platformBrowserDynamic()方法  
