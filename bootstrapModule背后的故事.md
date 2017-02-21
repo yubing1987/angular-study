@@ -29,7 +29,7 @@ compileModuleAsync
                        +--->_loadModules,_compileComponents,_compileModule
 ```
 ## 加载Module
-在加载Module的时候，首先是通过getNgModuleMetadata方法获取Model的meta数据，在这个方法中
+在加载Module的时候，首先是通过getNgModuleMetadata方法获取Model的meta数据（[meta数据是怎么来的](./Angular中注解的实现原理.md)），在这个方法中
 会得到class通过NgModule注解修饰的信息。  
 ```
 if (meta.imports){
