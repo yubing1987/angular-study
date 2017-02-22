@@ -134,7 +134,7 @@ export function createPlatform(injector: Injector): PlatformRef {
 ```
 在这段代码使用到了Injector的特性来创建的（todo:还是下次再分析）。创建完以后会获取所有名为PLATFORM_INITIALIZER的Provider，然后调用它。
 
-至此platformBrowserDynamic()执行过程已经全部理清楚了，在这个过程中会创建Injector和platform，其中Injector是依赖注入的关键。
+至此platformBrowserDynamic()执行过程已经全部理清楚了，在这个过程中会创建Injector和platform，其中Injector是依赖注入的关键(Injector依赖注入的关键[看这里](./Injector的实现原理.md))。
 在分析的过程中，发现可以通过定义一个PLATFORM_INITIALIZER名称的Provider实现在初始化Platform后执行代码。示例代码：
 ```
 function test(){

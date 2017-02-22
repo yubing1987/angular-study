@@ -7,7 +7,7 @@ const compilerFactory: CompilerFactory = this.injector.get(CompilerFactory);
 const compiler = compilerFactory.createCompiler(
         Array.isArray(compilerOptions) ? compilerOptions : [compilerOptions]);
 ```
-首先通过Injector得到一个得到一个Compiler的Factory（todo：具体过程这里不讲，以后单独讲）。然后通过Factory
+首先通过Injector得到一个得到一个Compiler的Factory（Injector创建事例的原理[看这里](./Injector的实现原理.md)）。然后通过Factory
 和option创建一个compiler用于Module和Component的编译。  
 Compiler的实际使用的是JitCompiler，通过JitCompilerFactory进行创建，创建的过程为：  
 1、根据option创建一个Injector  
