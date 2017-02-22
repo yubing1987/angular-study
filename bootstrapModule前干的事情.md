@@ -117,8 +117,7 @@ export function createPlatformFactory(
 2、判断是否有父Factory。
 3、如果有父Factory就把调用Factory时传入的Provider和调用createPlatformFactory传入的Provider合并，然后调用父Factory。
 4、如果没有父Factory，先创建一个Injector，然后去创建platform。
-由之前的关系图可以知道，当我们调用platformBrowserDynamic，实际调用的是platformCore，Provider就是各个createPlatformFactory传入的第三个参数，通过这些Provider创建了一个Injector，并通过Injector创建了platform。
-创建Injector的过程这里先不分析（todo:下次分析）。
+由之前的关系图可以知道，当我们调用platformBrowserDynamic，实际调用的是platformCore，Provider就是各个createPlatformFactory传入的第三个参数，通过这些Provider创建了一个Injector，并通过Injector创建了platform（创建过程[看这里](./Injector的实现原理.md)）。
 我们在看看创建Platform的过程：
 ```
 export function createPlatform(injector: Injector): PlatformRef {
@@ -132,7 +131,7 @@ export function createPlatform(injector: Injector): PlatformRef {
   return _platform;
 }
 ```
-在这段代码使用到了Injector的特性来创建的（todo:还是下次再分析）。创建完以后会获取所有名为PLATFORM_INITIALIZER的Provider，然后调用它。
+在这段代码使用到了Injector的特性来创建的（[看这里](./Injector的实现原理.md)）。创建完以后会获取所有名为PLATFORM_INITIALIZER的Provider，然后调用它。
 
 至此platformBrowserDynamic()执行过程已经全部理清楚了，在这个过程中会创建Injector和platform，其中Injector是依赖注入的关键(Injector依赖注入的关键[看这里](./Injector的实现原理.md))。
 在分析的过程中，发现可以通过定义一个PLATFORM_INITIALIZER名称的Provider实现在初始化Platform后执行代码。示例代码：
