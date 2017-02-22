@@ -116,6 +116,7 @@ export type Provider =
     TypeProvider | ValueProvider | ClassProvider | ExistingProvider | FactoryProvider | any[];
 ```
 从源码我们可以知道总共可以有5中类型的Provider以及一个数组类型的Provider。对于不同类型的Provider也有各自的定义和用法。  
+
 |类型|说明|  
 |---|---|  
 |TypeProvider|任意类型的类，任意一个类都可以成为一个Provider，Angular会对其进行包装，Factory就是new一个这个类型的事例，都是单例的|  
